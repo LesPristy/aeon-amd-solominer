@@ -25,7 +25,7 @@ Also, it can run faster as root, which allows it to use mlock.
 
 # Solo mining
 
-Use a URL of "daemon+tcp://<host>:<port>" - requires bitmonerod v0.9.3.1 or newer
+Use a URL of "daemon+tcp://<host>:<port>" - requires bitmonerod v0.9.3.1 or newer (or aeond with similar extensions)
 
 # Building
 
@@ -50,5 +50,8 @@ make
 ```
 
 # Donations
+LesPristy donation address
+* AEON: `WmtDvD5V3YE3dKZjoqSqDU3DeRmMM7SUrhyYP15Exe554SLkgHu27wCiUtApunfghU3C3sXDPiUtigWg2s2qh5M72qtq2mm7G`
 
+ORIGINAL DEV DONATION ADDRESS
 Donations accepted at: `42QWoLF7pdwMcTXDviJvNkWEHJ4TXnMBh2Cx6HNkVAW57E48Zfw6wLwDUYFDYJAqY7PLJUTz9cHWB5C4wUA7UJPu5wPf4sZ`
