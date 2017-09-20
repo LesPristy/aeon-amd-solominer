@@ -729,7 +729,12 @@ static void RestartMiners(PoolInfo *Pool)
 static const char getblkc[] = "POST /json_rpc HTTP/1.0\r\nContent-Length: 27\r\n\r\n"
 	"{\"method\": \"getblockcount\"}";
 
+#define LITE 1
+#if LITE /* cryptonight-light */
+#define WALLETLEN	97
+#else
 #define WALLETLEN	95
+#endif
 
 static char getblkt[] = "POST /json_rpc HTTP/1.0\r\nContent-Length: 178\r\n\r\n"
 	"{\"method\": \"getblocktemplate\", \"params\": {\"reserve_size\": 8, \"wallet_address\": "
