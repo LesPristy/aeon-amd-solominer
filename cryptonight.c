@@ -38,8 +38,13 @@ typedef __uint128_t uint128_t;
 
 #endif
 
-#define MEMORY         (1 << 21) /* 2 MiB */
-#define ITER           (1 << 20)
+#define LITE 1
+#if LITE /* cryptonight-light */
+#define MEMORY (1 << 20)
+#define ITER   (1 << 19)
+#else
+#define MEMORY (1 << 21) /* 2 MiB */
+#define ITER (1 << 20)
 #define AES_BLOCK_SIZE  16
 #define AES_KEY_SIZE    32 /*16*/
 #define INIT_SIZE_BLK   8
@@ -83,7 +88,7 @@ extern int aesb_pseudo_round_mut(uint8_t *val, uint8_t *expandedKey);
 
 // Credit to Wolf for optimizing this function
 static inline size_t e2i(const uint8_t* a) {
-	return ((uint32_t *)a)[0] & 0x1FFFF0;
+	return ((uint32_t *)a)[0] & 0xFFFF0;
 }
 
 static inline void mul_sum_xor_dst(const uint8_t* a, uint8_t* c, uint8_t* dst) {
@@ -354,18 +359,18 @@ void cryptonight_hash_aesni(void *restrict output, const void *restrict input, c
 
 	for(i = 0; __builtin_expect(i < 0x80000, 1); i++)
 	{
-	__m128i c_x = _mm_load_si128((__m128i *)&ctx->long_state[a[0] & 0x1FFFF0]);
+	__m128i c_x = _mm_load_si128((__m128i *)&ctx->long_state[a[0] & 0xFFFF0]);
 	__m128i a_x = _mm_load_si128((__m128i *)a);
 	uint64_t c[2];
 	c_x = _mm_aesenc_si128(c_x, a_x);
 
 	_mm_store_si128((__m128i *)c, c_x);
-	__builtin_prefetch(&ctx->long_state[c[0] & 0x1FFFF0], 0, 1);
+	__builtin_prefetch(&ctx->long_state[c[0] & 0xFFFF0], 0, 1);
 
 	b_x = _mm_xor_si128(b_x, c_x);
-	_mm_store_si128((__m128i *)&ctx->long_state[a[0] & 0x1FFFF0], b_x);
+	_mm_store_si128((__m128i *)&ctx->long_state[a[0] & 0xFFFF0], b_x);
 
-	uint64_t *nextblock = (uint64_t *)&ctx->long_state[c[0] & 0x1FFFF0];
+	uint64_t *nextblock = (uint64_t *)&ctx->long_state[c[0] & 0xFFFF0];
 	uint64_t b[2];
 	b[0] = nextblock[0];
 	b[1] = nextblock[1];
@@ -384,14 +389,14 @@ void cryptonight_hash_aesni(void *restrict output, const void *restrict input, c
 	  a[0] += hi;
 	  a[1] += lo;
 	}
-	uint64_t *dst = (uint64_t *)&ctx->long_state[c[0] & 0x1FFFF0];
+	uint64_t *dst = (uint64_t *)&ctx->long_state[c[0] & 0xFFFF0];
 	dst[0] = a[0];
 	dst[1] = a[1];
 
 	a[0] ^= b[0];
 	a[1] ^= b[1];
 	b_x = c_x;
-	__builtin_prefetch(&ctx->long_state[a[0] & 0x1FFFF0], 0, 3);
+	__builtin_prefetch(&ctx->long_state[a[0] & 0xFFFF0], 0, 3);
 	}
 
     memcpy(ctx->text, ctx->state.init, INIT_SIZE_BYTE);
