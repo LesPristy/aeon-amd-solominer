@@ -1,8 +1,6 @@
-# wolf-xmr-miner
+# aeon-amd-solominer (forked from wolf-xmr-miner)
 
-###NOTE: Wolf's XMR Miner is no longer maintained - please use https://github.com/genesismining/sgminer-gm.
-
-Wolf's OpenCL XMR Miner for AMD GPUs
+LesPristy's OpenCL AEON Miner for AMD GPUs
 
 If you get an error about `clCreateBuffer`, lower your `rawintensity`. See the example config [xmr.conf](xmr.conf) for details.
 
@@ -25,16 +23,21 @@ Also, it can run faster as root, which allows it to use mlock.
 
 # Solo mining
 
-Use a URL of "daemon+tcp://<host>:<port>" - requires bitmonerod v0.9.3.1 or newer (or aeond with similar extensions)
+Use a URL of "daemon+tcp://<host>:<port>" - requires aeond with open RPC port and "blockhashing blob" support.
+Stratum pool mining is not supported in this fork.
 
 # Building
 
-## Ubuntu 14.04
+## Ubuntu 14.04 or later
 
-gcc 5 or newer is required.
+Clone the "update" branch.
+```
+git clone https://github.com/LesPristy/aeon-amd-solominer.git -b update
+```
 
 ### Installing dependencies
 
+gcc 5 or newer is required.
 ```
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y && \
 sudo apt-get update && \
@@ -46,7 +49,7 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /u
 
 ```
 make
-./miner xmr.conf
+./miner aeon.conf
 ```
 
 # Donations
