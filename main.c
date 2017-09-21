@@ -736,9 +736,9 @@ static const char getblkc[] = "POST /json_rpc HTTP/1.0\r\nContent-Length: 27\r\n
 #define WALLETLEN	95
 #endif
 
-static char getblkt[] = "POST /json_rpc HTTP/1.0\r\nContent-Length: 178\r\n\r\n"
+static char getblkt[] = "POST /json_rpc HTTP/1.0\r\nContent-Length: 180\r\n\r\n"
 	"{\"method\": \"getblocktemplate\", \"params\": {\"reserve_size\": 8, \"wallet_address\": "
-	"\"9xaXMreKDK7bctpHtTE9zUUTgffkRvwZJ7UvyJGAQHkvBFqUYWwhVWWendW6NAdvtB8nn883WQxtU7cpe5eyJiUxLZ741t5\"}}";
+	"\"WmtDvD5V3YE3dKZjoqSqDU3DeRmMM7SUrhyYP15Exe554SLkgHu27wCiUtApunfghU3C3sXDPiUtigWg2s2qh5M72qtq2mm7G\"}}";
 
 void *DaemonThreadProc(void *InfoPtr)
 {
