@@ -45,6 +45,7 @@ typedef __uint128_t uint128_t;
 #else
 #define MEMORY (1 << 21) /* 2 MiB */
 #define ITER (1 << 20)
+#endif
 #define AES_BLOCK_SIZE  16
 #define AES_KEY_SIZE    32 /*16*/
 #define INIT_SIZE_BLK   8
