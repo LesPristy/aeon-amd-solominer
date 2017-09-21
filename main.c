@@ -1287,6 +1287,8 @@ void *MinerThreadProc(void *Info)
 		sprintf(ThrID, "Thread %d, (CPU)", MTInfo->ThreadID);
 	}
 	
+	double AllSeconds = 0;
+	
 	while(!ExitFlag)
 	{
 		TIME_TYPE begin, end;
@@ -1393,7 +1395,12 @@ again:
 		GlobalStatus.ThreadTimes[MTInfo->ThreadID] = Seconds;
 		pthread_mutex_unlock(&StatusMutex);
 		
-		Log(LOG_INFO, "%s: %.02fH/s", ThrID, hashes_done / (Seconds));
+		AllSeconds += Seconds;
+		if (AllSeconds > 60)
+                {
+                  Log(LOG_INFO, "%s: %.02fH/s", ThrID, hashes_done / (Seconds));
+                  AllSeconds = 0;
+                }
 	}
 	
 	if (MTInfo->PlatformContext)
