@@ -51,6 +51,9 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /u
 make
 ./miner aeon.conf
 ```
+You can mine using my public node, or you can set up your own node. You must have a version of aeond with Monero "blockhashing blob" support.
+
+There is no devfee. Be sure to update aeon.conf with your own AEON address, unless you feel like mining to my address!
 
 # Donations
 LesPristy donation address
