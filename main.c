@@ -884,7 +884,7 @@ retry:
 				uint64_t diff = json_integer_value(json_object_get(result, "difficulty"));
 				NextJob->XMRBlobLen = strlen(hasher) / 2;
 				ASCIIHexToBinary(NextJob->XMRBlob, hasher, NextJob->XMRBlobLen * 2);
-				Log(LOG_NOTIFY, "New block at diff %lu", diff);
+				Log(LOG_NOTIFY, "New block at height %1u, diff %lu", height, diff);
 				diff = 0xffffffffffffffffUL / diff;
 				NextJob->XMRTarget = diff;
 				NextJob->blockblob = strdup(tmpl);
